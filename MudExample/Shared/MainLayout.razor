@@ -1,0 +1,52 @@
+﻿@inherits LayoutComponentBase
+
+
+<MudLayout>
+    <MudAppBar Elevation="1" Class="app-bar">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleSideBar" />
+        @*back to site *@
+        <MudLink Href="/">
+            <img src="" />
+        </MudLink>
+
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
+    </MudAppBar>
+    <MudDrawer Variant="@DrawerVariant.Responsive" @bind-Open="IsDrawerOpened" ClipMode="DrawerClipMode.Always" Class="sidenav-menu" Elevation="2">
+
+        <MudDrawerContainer Class="d-flex flex-column justify-space-between h-100">
+
+            <MudItem>
+                <ErrorBoundary>
+                    @* was component *@
+                </ErrorBoundary>
+
+                @*<SideMenu />*@
+                <MudNavMenu>
+                    <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.Dashboard" Href="/admin">Dashboard</MudNavLink>
+                    <MudNavLink Href="/admin/settings" Icon="@Icons.Filled.Settings">Settings</MudNavLink>
+                    <MudNavLink Href="/admin/logout" Icon="@Icons.Filled.ExitToApp">Exit</MudNavLink>
+                </MudNavMenu>
+
+            </MudItem>
+
+            <MudItem>
+                <MudLink Href="" Class="d-flex flex-column align-center copiright-link">
+                    <img src="" />
+                    <MudText Class="copiright-link-text"></MudText>
+                </MudLink>
+            </MudItem>
+
+        </MudDrawerContainer>
+    </MudDrawer>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+
+@code
+{
+    public bool IsDrawerOpened { get; set; } = true;
+    protected void ToggleSideBar(MouseEventArgs eventArgs) => IsDrawerOpened = !IsDrawerOpened;
+}
